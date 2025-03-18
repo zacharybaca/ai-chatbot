@@ -1,0 +1,664 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "a,bug,do,how,i,report": {
+            "intent": "bug.report",
+            "domain": "default"
+          },
+          "a,bug,can,i,submit,where": {
+            "intent": "bug.report",
+            "domain": "default"
+          },
+          "are,assign,my,task,what": {
+            "intent": "task.assigned",
+            "domain": "default"
+          },
+          "my,show,task,unassign": {
+            "intent": "task.unassigned",
+            "domain": "default"
+          },
+          "can,i,in,log,not": {
+            "intent": "auth.issue",
+            "domain": "default"
+          },
+          "do,how,i,my,password,reset": {
+            "intent": "auth.reset",
+            "domain": "default"
+          },
+          "doe,how,system,this,work": {
+            "intent": "general.help",
+            "domain": "default"
+          },
+          "about,bug,me,tell,this,tracker": {
+            "intent": "general.help",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "bug.report": "default",
+          "task.assigned": "default",
+          "task.unassigned": "default",
+          "auth.issue": "default",
+          "auth.reset": "default",
+          "general.help": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "how do I report a bug?",
+            "intent": "bug.report"
+          },
+          {
+            "domain": "default",
+            "utterance": "where can I submit a bug?",
+            "intent": "bug.report"
+          },
+          {
+            "domain": "default",
+            "utterance": "what are my assigned tasks?",
+            "intent": "task.assigned"
+          },
+          {
+            "domain": "default",
+            "utterance": "show my unassigned tasks",
+            "intent": "task.unassigned"
+          },
+          {
+            "domain": "default",
+            "utterance": "I cannot log in",
+            "intent": "auth.issue"
+          },
+          {
+            "domain": "default",
+            "utterance": "how do I reset my password?",
+            "intent": "auth.reset"
+          },
+          {
+            "domain": "default",
+            "utterance": "how does this system work?",
+            "intent": "general.help"
+          },
+          {
+            "domain": "default",
+            "utterance": "tell me about this bug tracker",
+            "intent": "general.help"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "how": 1,
+              "do": 1,
+              "i": 1,
+              "report": 1,
+              "a": 1,
+              "bug": 1,
+              "where": 1,
+              "can": 1,
+              "submit": 1,
+              "what": 1,
+              "are": 1,
+              "my": 1,
+              "assign": 1,
+              "task": 1,
+              "show": 1,
+              "unassign": 1,
+              "not": 1,
+              "log": 1,
+              "in": 1,
+              "reset": 1,
+              "password": 1,
+              "doe": 1,
+              "this": 1,
+              "system": 1,
+              "work": 1,
+              "tell": 1,
+              "me": 1,
+              "about": 1,
+              "tracker": 1
+            },
+            "intents": {
+              "bug.report": 1,
+              "task.assigned": 1,
+              "task.unassigned": 1,
+              "auth.issue": 1,
+              "auth.reset": 1,
+              "general.help": 1
+            },
+            "intentFeatures": {
+              "bug.report": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "report": 1,
+                "a": 1,
+                "bug": 1,
+                "where": 1,
+                "can": 1,
+                "submit": 1
+              },
+              "task.assigned": {
+                "what": 1,
+                "are": 1,
+                "my": 1,
+                "assign": 1,
+                "task": 1
+              },
+              "task.unassigned": {
+                "show": 1,
+                "my": 1,
+                "unassign": 1,
+                "task": 1
+              },
+              "auth.issue": {
+                "i": 1,
+                "can": 1,
+                "not": 1,
+                "log": 1,
+                "in": 1
+              },
+              "auth.reset": {
+                "how": 1,
+                "do": 1,
+                "i": 1,
+                "reset": 1,
+                "my": 1,
+                "password": 1
+              },
+              "general.help": {
+                "how": 1,
+                "doe": 1,
+                "this": 1,
+                "system": 1,
+                "work": 1,
+                "tell": 1,
+                "me": 1,
+                "about": 1,
+                "bug": 1,
+                "tracker": 1
+              }
+            },
+            "featuresToIntent": {
+              "how": [
+                "bug.report",
+                "auth.reset",
+                "general.help"
+              ],
+              "do": [
+                "bug.report",
+                "auth.reset"
+              ],
+              "i": [
+                "bug.report",
+                "auth.issue",
+                "auth.reset"
+              ],
+              "report": [
+                "bug.report"
+              ],
+              "a": [
+                "bug.report"
+              ],
+              "bug": [
+                "bug.report",
+                "general.help"
+              ],
+              "where": [
+                "bug.report"
+              ],
+              "can": [
+                "bug.report",
+                "auth.issue"
+              ],
+              "submit": [
+                "bug.report"
+              ],
+              "what": [
+                "task.assigned"
+              ],
+              "are": [
+                "task.assigned"
+              ],
+              "my": [
+                "task.assigned",
+                "task.unassigned",
+                "auth.reset"
+              ],
+              "assign": [
+                "task.assigned"
+              ],
+              "task": [
+                "task.assigned",
+                "task.unassigned"
+              ],
+              "show": [
+                "task.unassigned"
+              ],
+              "unassign": [
+                "task.unassigned"
+              ],
+              "not": [
+                "auth.issue"
+              ],
+              "log": [
+                "auth.issue"
+              ],
+              "in": [
+                "auth.issue"
+              ],
+              "reset": [
+                "auth.reset"
+              ],
+              "password": [
+                "auth.reset"
+              ],
+              "doe": [
+                "general.help"
+              ],
+              "this": [
+                "general.help"
+              ],
+              "system": [
+                "general.help"
+              ],
+              "work": [
+                "general.help"
+              ],
+              "tell": [
+                "general.help"
+              ],
+              "me": [
+                "general.help"
+              ],
+              "about": [
+                "general.help"
+              ],
+              "tracker": [
+                "general.help"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "how",
+                "do",
+                "i",
+                "report",
+                "a",
+                "bug",
+                "where",
+                "can",
+                "submit",
+                "what",
+                "are",
+                "my",
+                "assign",
+                "task",
+                "show",
+                "unassign",
+                "not",
+                "log",
+                "in",
+                "reset",
+                "password",
+                "doe",
+                "this",
+                "system",
+                "work",
+                "tell",
+                "me",
+                "about",
+                "tracker"
+              ],
+              "intents": [
+                "bug.report",
+                "task.assigned",
+                "task.unassigned",
+                "auth.issue",
+                "auth.reset",
+                "general.help"
+              ],
+              "perceptrons": [
+                [
+                  0.8812670111656189,
+                  1.0974794626235962,
+                  1.8180426359176636,
+                  2.3635926246643066,
+                  4.248402118682861,
+                  3.4870944023132324,
+                  1.875666856765747,
+                  0.7285865545272827,
+                  1.875666856765747,
+                  -0.10466071963310242,
+                  -0.10466071963310242,
+                  -1.522371768951416,
+                  -0.10466071963310242,
+                  -0.22700591385364532,
+                  -0.08908455818891525,
+                  -0.08908455818891525,
+                  -1.0495588779449463,
+                  -1.0495588779449463,
+                  -1.0495588779449463,
+                  -1.2771351337432861,
+                  -1.2771351337432861,
+                  -0.17776088416576385,
+                  -0.941119372844696,
+                  -0.17776088416576385,
+                  -0.17776088416576385,
+                  -0.7198272347450256,
+                  -0.7198272347450256,
+                  -0.7198272347450256,
+                  -0.7198272347450256,
+                  0.2964943602644752
+                ],
+                [
+                  -0.4745105504989624,
+                  -0.39660510420799255,
+                  -0.522160530090332,
+                  -0.006061627063900232,
+                  -0.02944411337375641,
+                  -0.12527792155742645,
+                  -0.01906895823776722,
+                  -0.10463119298219681,
+                  -0.01906895823776722,
+                  3.5420782566070557,
+                  3.5420782566070557,
+                  1.3283343315124512,
+                  3.5420782566070557,
+                  1.7615606784820557,
+                  -1.7809860706329346,
+                  -1.7809860706329346,
+                  -0.07127009332180023,
+                  -0.07127009332180023,
+                  -0.07127009332180023,
+                  -0.3834576904773712,
+                  -0.3834576904773712,
+                  -0.05183276906609535,
+                  -0.1502431184053421,
+                  -0.05183276906609535,
+                  -0.05183276906609535,
+                  -0.08311236649751663,
+                  -0.08311236649751663,
+                  -0.08311236649751663,
+                  -0.08311236649751663,
+                  0.5149772712449081
+                ],
+                [
+                  -0.6331217288970947,
+                  -0.5387635231018066,
+                  -0.6980761885643005,
+                  -0.009907953441143036,
+                  -0.04257224500179291,
+                  -0.176596537232399,
+                  -0.025614695623517036,
+                  -0.13525399565696716,
+                  -0.025614695623517036,
+                  -1.764066457748413,
+                  -1.764066457748413,
+                  2.0335679054260254,
+                  -1.764066457748413,
+                  2.5780460834503174,
+                  4.348203182220459,
+                  4.348203182220459,
+                  -0.09098213165998459,
+                  -0.09098213165998459,
+                  -0.09098213165998459,
+                  -0.5193811655044556,
+                  -0.5193811655044556,
+                  -0.07022080570459366,
+                  -0.20923101902008057,
+                  -0.07022080570459366,
+                  -0.07022080570459366,
+                  -0.11753224581480026,
+                  -0.11753224581480026,
+                  -0.11753224581480026,
+                  -0.11753224581480026,
+                  0.8230514229495394
+                ],
+                [
+                  -0.6566622257232666,
+                  -0.5852404832839966,
+                  1.5953738689422607,
+                  -0.17763380706310272,
+                  -1.272202730178833,
+                  -1.3441554307937622,
+                  -1.0407812595367432,
+                  2.217351198196411,
+                  -1.0407812595367432,
+                  -0.04558780789375305,
+                  -0.04558780789375305,
+                  -0.49245697259902954,
+                  -0.04558780789375305,
+                  -0.10668110102415085,
+                  -0.048012495040893555,
+                  -0.048012495040893555,
+                  3.2954320907592773,
+                  3.2954320907592773,
+                  3.2954320907592773,
+                  -0.34825101494789124,
+                  -0.34825101494789124,
+                  -0.04641074314713478,
+                  -0.11393021792173386,
+                  -0.04641074314713478,
+                  -0.04641074314713478,
+                  -0.04745536297559738,
+                  -0.04745536297559738,
+                  -0.04745536297559738,
+                  -0.04745536297559738,
+                  0.6657889892189599
+                ],
+                [
+                  1.5142828226089478,
+                  1.9504656791687012,
+                  1.480043649673462,
+                  -1.5356749296188354,
+                  -1.6632922887802124,
+                  -1.7063568830490112,
+                  -0.08552070707082748,
+                  -0.45860645174980164,
+                  -0.08552070707082748,
+                  -0.4453921616077423,
+                  -0.4453921616077423,
+                  2.4091317653656006,
+                  -0.4453921616077423,
+                  -1.0835374593734741,
+                  -0.6131779551506042,
+                  -0.6131779551506042,
+                  -0.3312819302082062,
+                  -0.3312819302082062,
+                  -0.3312819302082062,
+                  3.488867998123169,
+                  3.488867998123169,
+                  -0.3847939670085907,
+                  -0.433951199054718,
+                  -0.3847939670085907,
+                  -0.3847939670085907,
+                  -0.03242139518260956,
+                  -0.03242139518260956,
+                  -0.03242139518260956,
+                  -0.03242139518260956,
+                  -0.046541059188991395
+                ],
+                [
+                  1.4748530387878418,
+                  -0.902474045753479,
+                  -1.2974653244018555,
+                  -0.6999208927154541,
+                  -1.0406895875930786,
+                  0.8372872471809387,
+                  -0.24627217650413513,
+                  -0.3581133186817169,
+                  -0.24627217650413513,
+                  -0.17551197111606598,
+                  -0.17551197111606598,
+                  -0.5945765376091003,
+                  -0.17551197111606598,
+                  -0.42278674244880676,
+                  -0.20338387787342072,
+                  -0.20338387787342072,
+                  -0.04665054753422737,
+                  -0.04665054753422737,
+                  -0.04665054753422737,
+                  -0.1452118307352066,
+                  -0.1452118307352066,
+                  2.404557466506958,
+                  4.3393378257751465,
+                  2.404557466506958,
+                  2.404557466506958,
+                  1.9378911256790161,
+                  1.9378911256790161,
+                  1.9378911256790161,
+                  1.9378911256790161,
+                  1.2910462887725331
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "how do I report a bug?"
+      ],
+      [
+        "en",
+        "where can I submit a bug?"
+      ],
+      [
+        "en",
+        "what are my assigned tasks?"
+      ],
+      [
+        "en",
+        "show my unassigned tasks"
+      ],
+      [
+        "en",
+        "I cannot log in"
+      ],
+      [
+        "en",
+        "how do I reset my password?"
+      ],
+      [
+        "en",
+        "how does this system work?"
+      ],
+      [
+        "en",
+        "tell me about this bug tracker"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "bug.report": [
+          {
+            "answer": "You can report a bug by visiting the \"Report a Bug\" section in your dashboard."
+          }
+        ],
+        "task.assigned": [
+          {
+            "answer": "I can fetch your assigned tasks. Please wait..."
+          }
+        ],
+        "task.unassigned": [
+          {
+            "answer": "I will list all unassigned tasks for you."
+          }
+        ],
+        "auth.issue": [
+          {
+            "answer": "If you cannot log in, please check your credentials or reset your password."
+          }
+        ],
+        "auth.reset": [
+          {
+            "answer": "To reset your password, go to the login page and click on \"Forgot Password\"."
+          }
+        ],
+        "general.help": [
+          {
+            "answer": "This bug tracker helps you manage and resolve software issues efficiently."
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
