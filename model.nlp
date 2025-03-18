@@ -626,16 +626,6 @@
             "answer": "You can report a bug by visiting the \"Report a Bug\" section in your dashboard."
           }
         ],
-        "task.assigned": [
-          {
-            "answer": "I can fetch your assigned tasks. Please wait..."
-          }
-        ],
-        "task.unassigned": [
-          {
-            "answer": "I will list all unassigned tasks for you."
-          }
-        ],
         "auth.issue": [
           {
             "answer": "If you cannot log in, please check your credentials or reset your password."

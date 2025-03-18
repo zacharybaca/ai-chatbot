@@ -1,4 +1,4 @@
-import authenticateUser from "./middleware/authenticateUser";
+const authenticateUser = require("./middleware/middleware.js");
 const { NlpManager } = require("node-nlp");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -8,10 +8,6 @@ const rateLimit = require("express-rate-limit");
 
 require("dotenv").config({ path: "./.env" });
 
-const app = express();
-app.use(bodyParser.json());
-app.use("/bot", limiter);
-
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 10, // Limit each IP to 10 requests per minute
@@ -20,6 +16,10 @@ const limiter = rateLimit({
   },
   headers: true, // Send rate limit info in response headers
 });
+
+const app = express();
+app.use(bodyParser.json());
+app.use("/bot", limiter);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
