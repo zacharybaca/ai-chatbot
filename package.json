@@ -28,5 +28,8 @@
     "mongoose": "^8.12.1",
     "node-nlp": "^5.0.0-alpha.5",
     "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
