@@ -1,21 +1,24 @@
 const jwt = require("jsonwebtoken");
 
+// Temporary in-memory token blacklist
+// In production, you can use a database or other persistent store
+const blacklistedTokens = new Set();
+
 const authenticateUser = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
+  const token = req.header("Authorization")?.split(" ")[1];
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Access denied. No token provided." });
+  if (!token) return res.status(401).json({ message: "Access Denied" });
+
+  if (blacklistedTokens.has(token)) {
+    return res.status(403).json({ message: "Token has been invalidated. Please log in again." });
   }
 
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET);
-    req.user = decoded; // Attach user info to request
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) return res.status(403).json({ message: "Invalid token" });
+
+    req.user = decoded;
     next();
-  } catch (error) {
-    res.status(403).json({ message: "Invalid or expired token." });
-  }
+  });
 };
 
 module.exports = authenticateUser;
