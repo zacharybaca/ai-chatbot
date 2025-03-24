@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "production": "NODE_ENV=production node chatbot.js",
+    "start": "node chatbot.js",
     "dev": "cross-env NODE_ENV=development nodemon chatbot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
