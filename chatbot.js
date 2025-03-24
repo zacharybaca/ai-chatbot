@@ -10,6 +10,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const rateLimit = require("express-rate-limit");
+const apiUrl =
+  process.env.NODE_ENV === "development"
+    ? "/api/bot"
+    : "https://ai-chatbot-mtn3.onrender.com";
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
@@ -109,7 +113,7 @@ const logInteraction = (userMessage, botResponse) => {
 };
 
 // Chatbot API
-app.post("/api/bot", authenticateUser, async (req, res) => {
+app.post(apiUrl, authenticateUser, async (req, res) => {
   const { message } = req.body;
 
   if (!message) {
@@ -153,6 +157,6 @@ app.post("/api/bot", authenticateUser, async (req, res) => {
 });
 
 // Start Server
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Chatbot server running on Port 3000");
 });
