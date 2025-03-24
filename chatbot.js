@@ -1,4 +1,4 @@
-const { authenticateUser } = require("./middleware/middleware.js");
+const { authenticateUser, blacklistedTokens } = require("./middleware/middleware.js");
 const { NlpManager } = require("node-nlp");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -117,10 +117,10 @@ app.post("/api/bot", authenticateUser, async (req, res) => {
   let botReply =
     response.answer ||
     "I'm not sure how to respond. Here are some things I can help with: 'report a bug', 'assigned tasks', 'reset password', 'help'.";
-
+  
   // Handle Task Queries
   if (response.intent === "task.assigned") {
-    const userId = req.user?.id; // Ensure user ID exists
+    const userId = req.auth?._id; // Ensure user ID exists
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized. Please log in." });
     }
