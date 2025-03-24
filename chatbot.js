@@ -1,12 +1,15 @@
-const { authenticateUser, blacklistedTokens } = require("./middleware/middleware.js");
+require("dotenv").config({ path: "./.env" });
+
+const {
+  authenticateUser,
+  blacklistedTokens,
+} = require("./middleware/middleware.js");
 const { NlpManager } = require("node-nlp");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const rateLimit = require("express-rate-limit");
-
-require("dotenv").config({ path: "./.env" });
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
@@ -117,7 +120,7 @@ app.post("/api/bot", authenticateUser, async (req, res) => {
   let botReply =
     response.answer ||
     "I'm not sure how to respond. Here are some things I can help with: 'report a bug', 'assigned tasks', 'reset password', 'help'.";
-  
+
   // Handle Task Queries
   if (response.intent === "task.assigned") {
     const userId = req.auth?._id; // Ensure user ID exists
