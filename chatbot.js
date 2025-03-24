@@ -1,4 +1,4 @@
-const authenticateUser = require("./middleware/middleware.js");
+const { authenticateUser } = require("./middleware/middleware.js");
 const { NlpManager } = require("node-nlp");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -19,7 +19,7 @@ const limiter = rateLimit({
 
 const app = express();
 app.use(bodyParser.json());
-app.use("/bot", limiter);
+app.use("/api/bot", limiter);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -106,7 +106,7 @@ const logInteraction = (userMessage, botResponse) => {
 };
 
 // Chatbot API
-app.post("/bot", authenticateUser, async (req, res) => {
+app.post("/api/bot", authenticateUser, async (req, res) => {
   const { message } = req.body;
 
   if (!message) {
