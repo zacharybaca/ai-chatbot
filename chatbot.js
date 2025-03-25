@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const cors = require('cors');
 const {
   authenticateUser,
   blacklistedTokens,
@@ -25,7 +25,9 @@ const limiter = rateLimit({
 });
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/bot", limiter);
 
 // Connect to MongoDB
