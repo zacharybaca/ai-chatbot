@@ -40,10 +40,23 @@ mongoose.connect(process.env.MONGODB_URI, {
 const Task = mongoose.model(
   "Task",
   new mongoose.Schema({
-    title: String,
-    assignedEmployee: String,
-    completed: Boolean,
-    createdAt: Date,
+    taskTitle: String,
+    taskCompleted: Boolean,
+    taskDetails: String,
+    taskTodos: String,
+    taskUpdates: [
+      {
+        updateText: { type: String, required: false },
+        updatedAt: { type: Date, default: Date.now },
+      },
+    ],
+    category: {
+      type: String,
+      enum: ["Frontend", "Backend", "Performance", "Security", "Uncategorized"],
+      default: "Uncategorized",
+    },
+    assignedEmployee: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
+    createdAt: { type: Date, default: Date.now },
   })
 );
 
@@ -130,25 +143,39 @@ app.post(apiUrl, authenticateUser, async (req, res) => {
   // Handle Task Queries
   if (response.intent === "task.assigned") {
     const userId = req.auth?._id; // Ensure user ID exists
+
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized. Please log in." });
     }
+
     const tasks = await Task.find({ assignedEmployee: userId });
+
     const randomReply =
       responses["task.assigned"][
         Math.floor(Math.random() * responses["task.assigned"].length)
       ];
+
     botReply = tasks.length
-      ? `${randomReply} ${tasks.map((task) => task.title).join(", ")}`
+      ? `${randomReply} ${tasks.map((task) => task.taskTitle).join(", ")}`
       : "You have no assigned tasks.";
+
   } else if (response.intent === "task.unassigned") {
-    const unassignedTasks = await Task.find({ assignedEmployee: null });
+
+    const unassignedTasks = await Task.find({
+      $or: [{ assignedEmployee: null }, { assignedEmployee: "" }],
+    });
+
     const randomReply =
       responses["task.unassigned"][
         Math.floor(Math.random() * responses["task.unassigned"].length)
       ];
+
+    const taskList = unassignedTasks
+      .map((task) => task?.taskTitle?.trim() || "Unnamed Task")
+      .join(", ");
+
     botReply = unassignedTasks.length
-      ? `${randomReply} ${unassignedTasks.map((task) => task.title).join(", ")}`
+      ? `${randomReply} ${taskList}`
       : "No unassigned tasks at the moment.";
   }
 
