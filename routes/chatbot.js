@@ -129,10 +129,4 @@ router.post("/", authenticateUser, async (req, res) => {
   res.json({ answer: botReply });
 });
 
-// Function to log the interaction (can be abstracted to a separate file if needed)
-const logInteraction = (message, reply) => {
-  console.log(`User Message: ${message}`);
-  console.log(`Bot Reply: ${reply}`);
-};
-
 module.exports = router;
