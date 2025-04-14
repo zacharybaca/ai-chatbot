@@ -46,7 +46,7 @@ const trainAndSave = async () => {
     );
 
     await manager.train();
-    await manager.save("./model.nlp");
+    await manager.save("../model.nlp");
   }
 };
 
