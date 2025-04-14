@@ -12,6 +12,6 @@ const authenticateUser = jwt({
 
     return blacklistedTokens.has(token.jti); // Check if token is blacklisted
   },
-}).unless({ path: ["/api/employees/login"] }); // Exclude public endpoints
+}).unless({ path: ["/api/employees/login", "/api/bot/general"] }); // Exclude public endpoints
 
 module.exports = { authenticateUser, blacklistedTokens };

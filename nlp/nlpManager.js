@@ -16,6 +16,7 @@ const trainAndSave = async () => {
     manager.addDocument("en", "how do I reset my password?", "auth.reset");
     manager.addDocument("en", "how does this system work?", "general.help");
     manager.addDocument("en", "tell me about this bug tracker", "general.help");
+    manager.addDocument("en", "how do you sign up?", "general.signup");
 
     // Answers
     manager.addAnswer(
@@ -27,6 +28,11 @@ const trainAndSave = async () => {
       "en",
       "auth.issue",
       "If you're having trouble logging in, double-check your credentials or reset your password."
+    );
+    manager.addAnswer(
+      "en",
+      "general.signup",
+      `\nStep 1: Click The Sign Up Button \nStep 2: Fill Out Form \nStep 3: If you do not know your Access Code, get with your manager`
     );
     manager.addAnswer(
       "en",
